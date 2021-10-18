@@ -1,0 +1,5 @@
+/venv
+/media
+/db.sqlite3
+/hifi-gan
+/tacotron2

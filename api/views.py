@@ -1,6 +1,7 @@
 import json
+import os
 
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 
@@ -49,8 +50,11 @@ def voice_clone(request):
         text = data["text"]
         model = get_object_or_404(VoiceModel, name_of_voice=name)
         model_path = model.model_path
-        inference(text=text, model_path=model_path)
-        return JsonResponse({
-            "Result": "Success",
-            "Message": text
-        }, status=200)
+        file_path = inference(text=text, model_path=model_path)
+        with open(file_path, "rb") as f:
+            response = HttpResponse()
+            response.write(f.read())
+        os.remove(file_path)
+        response['Content-Type'] = 'audio/wav'
+        response['Content-Length'] = os.path.getsize(file_path)
+        return response

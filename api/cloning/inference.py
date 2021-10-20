@@ -36,7 +36,7 @@ def inference(text, model_path):
             end_chars = ''
             while any(elem in word for elem in punctuation) and len(word) > 1:
                 if word[-1] in punctuation:
-                    end_chars = word[-1] + end_chars;
+                    end_chars = word[-1] + end_chars
                     word = word[:-1]
                 else:
                     break
@@ -67,6 +67,7 @@ def inference(text, model_path):
         return hifigan, h
 
     hifigan, h = get_hifigan()
+    print("reading 1")
 
     def has_MMI(STATE_DICT):
         return any(True for x in STATE_DICT.keys() if "mi." in x)
@@ -103,6 +104,7 @@ def inference(text, model_path):
                 # ipd.display(ipd.Audio(audio.cpu().numpy().astype("int16"), rate=hparams.sampling_rate))
                 rnd_string = ''.join(random.choice(string.ascii_lowercase) for _ in range(10))
                 write(f'{rnd_string}.wav', hparams.sampling_rate, audio.cpu().numpy().astype("int16"))
+                print("reading 2")
                 return rnd_string
 
     model, hparams = get_Tactron2()

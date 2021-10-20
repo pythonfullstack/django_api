@@ -54,7 +54,10 @@ def voice_clone(request):
         with open(file_path, "rb") as f:
             response = HttpResponse()
             response.write(f.read())
+        print("reading 1")
         os.remove(file_path)
+        print("reading 2")
         response['Content-Type'] = 'audio/wav'
         response['Content-Length'] = os.path.getsize(file_path)
+        print("reading 3")
         return response

@@ -67,7 +67,6 @@ def inference(text, model_path):
         return hifigan, h
 
     hifigan, h = get_hifigan()
-    print("reading 1")
 
     def has_MMI(STATE_DICT):
         return any(True for x in STATE_DICT.keys() if "mi." in x)
@@ -104,7 +103,6 @@ def inference(text, model_path):
                 # ipd.display(ipd.Audio(audio.cpu().numpy().astype("int16"), rate=hparams.sampling_rate))
                 rnd_string = ''.join(random.choice(string.ascii_lowercase) for _ in range(10))
                 write(f'{rnd_string}.wav', hparams.sampling_rate, audio.cpu().numpy().astype("int16"))
-                print("reading 2")
                 return rnd_string
 
     model, hparams = get_Tactron2()

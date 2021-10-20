@@ -51,14 +51,11 @@ def voice_clone(request):
         model = get_object_or_404(VoiceModel, name_of_voice=name)
         model_path = model.model_path
         file_path = inference(text=text, model_path=model_path)
-        print(file_path)
         with open(file_path, "rb") as f:
             response = HttpResponse()
             response.write(f.read())
-        print("reading 1")
-        os.remove(file_path)
-        print("reading 2")
         response['Content-Type'] = 'audio/wav'
         response['Content-Length'] = os.path.getsize(file_path)
+        os.remove(file_path)
         print("reading 3")
         return response

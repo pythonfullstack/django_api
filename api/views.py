@@ -57,5 +57,4 @@ def voice_clone(request):
         response['Content-Type'] = 'audio/wav'
         response['Content-Length'] = os.path.getsize(file_path)
         os.remove(file_path)
-        print("reading 3")
         return response

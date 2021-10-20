@@ -112,4 +112,4 @@ def inference(text, model_path):
     stop_threshold = 0.324  # @param {type:"number"}
     model.decoder.gate_threshold = stop_threshold
 
-    end_to_end_infer(pronounciation_dictionary)
+    return end_to_end_infer(pronounciation_dictionary)

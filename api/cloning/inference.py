@@ -24,6 +24,7 @@ from scipy.io.wavfile import write
 
 
 def inference(text, model_path):
+    print(text, model_path)
     thisdict = {}
     for line in reversed((open('./api/cloning/merged.dict.txt', "r").read()).splitlines()):
         thisdict[(line.split(" ", 1))[0]] = (line.split(" ", 1))[1].strip()
